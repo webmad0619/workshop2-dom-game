@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        class Obstacle {
+            constructor(x, y, w, h) {
+                this.x = x
+                this.y = y 
+                this.w = w
+                this.h = h
+            }
+        }
+
+        let obstacles = [
+            new Obstacle(300, 500, 40, 100),
+            new Obstacle(200, 100, 40, 100)
+        ]
+
+        let knightPosX = 198
+
+        window.onkeydown = function (e) {
+            if (e.keyCode === 39) {
+                knightPosX++
+
+                obstacles.forEach(obstacle => {
+                    console.log(`the knight is on ${knightPosX}`)
+                    console.log(obstacle.x)
+                    console.log(obstacle.y)
+                    console.log(obstacle.w)
+                    console.log(obstacle.h)
+
+                    if (knightPosX >= obstacle.x) {
+                        console.log(`collision detected`)
+                        knightPosX = obstacle.x
+                    }
+
+                    console.log("*".repeat(100))
+                })
+            }
+        }
+        
+    </script>
+</body>
+</html>
