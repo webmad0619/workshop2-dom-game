@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+    class Enemy {
+        constructor(x, y, life) {
+            this.x = x
+            this.y = y
+            this.life = life
+        }
+
+        die() {
+            
+        }
+
+        reduceLife(lifePointsRemoved) {
+            this.life -= lifePointsRemoved
+
+            if (this.life < 0) {
+                this.die()
+            }
+        }
+    }
+
+    class Bullet {
+        constructor(x, y, lifeRemoved) {
+            this.x = x
+            this.y = y
+            this.lifeRemoved = lifeRemoved
+        }
+
+        fly() {
+            setInterval(() => this.x++, 10)
+        }
+
+        checkCollision(enemies) {
+            enemies.forEach(enemy => {
+                // this.x means the x of the bullet :)
+                if (enemy.x === this.x) {
+                    // enemy.die()
+                    enemy.reduceLife(this.lifeRemoved)
+                }
+            })
+        }
+    }
+
+    let enemies = [
+        new Enemy(100, 100, 100),
+        new Enemy(200, 120, 100),
+        new Enemy(300, 220, 100)
+    ]
+
+    var bullet = new Bullet(50, 100, 10)
+    bullet.fly()
+    bullet.checkCollision(enemies)
+        
+    </script>
+</body>
+</html>
