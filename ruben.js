@@ -57,11 +57,13 @@ canvasDOMEl.setAttribute("width", window.innerWidth);
 class LifeBar {
     maxWidth = 200
     totalLifePoints = 100
-    currentLifePoints = 100
 
-    constructor(x, y) {
+    constructor(x, y, color, currentLifePoints) {
         this.x = x
         this.y = y 
+        this.currentLifePoints = currentLifePoints
+        this.color = color
+        ctx.fillStyle = this.color
         ctx.beginPath();
         ctx.rect(x, y, this.maxWidth, 10)
         ctx.fill();
@@ -69,8 +71,7 @@ class LifeBar {
     }
 
     reduceLife(reducedLifePoints) {
-        ctx.clearRect(0, 0, w, h);
-        
+        ctx.fillStyle = this.color
         this.currentLifePoints -= reducedLifePoints
         
         let newLength = this.maxWidth * (this.currentLifePoints) / this.totalLifePoints
@@ -94,9 +95,12 @@ let player2 = {
     }
 }
 
-let lifeBar1 = new LifeBar(player1.getLifePoints(), 200)
-let lifeBar2 = new LifeBar(player2.getLifePoints(), 200)
+let lifeBar1 = new LifeBar(100, 200, "red", player1.getLifePoints())
+let lifeBar2 = new LifeBar(500, 200, "yellow", player2.getLifePoints())
 
 window.onclick = function () {
+    ctx.clearRect(0, 0, w, h);
+
     lifeBar1.reduceLife(10)
+    lifeBar2.reduceLife(30)
 }
